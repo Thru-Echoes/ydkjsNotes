@@ -2148,13 +2148,171 @@ ANSWER -> for...of
 
 * for...of -> advances through data values one at a time (not indices)
 
+#########################################################
+
+// Review Ch 3 again before heading into Ch 4.
+
+* Objects in JS have literal form and constructed form
+    literal form of objects: var a = {...}
+    constructed form of objects: var a = new Array(...)
+
+* not everything in JS is object
+    -> objects are 1 of 6 primitive types
+
+* Function and Array => special subtypes of objects
+
+* Objects are collections of key/value pairs
+    -> values can accessed as properties
+
+* [[Get]] operation is ran by engine everytime property is accessed
+        -> look for property in Object and traverse [[Prototype]] chain
+* [[Put]] operation is ran by engine everytime property is set (setting values)
+
+* Properties (again, value within key/value of Object)
+    -> controlled through property descriptors
+        * writable
+        * configurable
+    -> Object mutability can be modified
+        * Object.preventExtensions(...)
+        * Object.seal(...)
+        * Object.freeze(...)
+
+* Properties (again, again, value within key/value of Object)
+    -> can actually be accessor properties
+        * getter / setter
+            -> set accessor properties values
+            -> so, value is actually point to accessor property
+
+- - - - - - - - - - - - - - - - - - - - -
+
+                ---
+                // example code reviewing getters/setters
+                var myObject = {
+                    // define getter for 'a'
+                    get a() {
+                        return this._a_;
+                    },
+
+                    // define setter for 'a'
+                    set a(val) {
+                        this._a_ = val * 2;
+                    }
+                };
+
+                myObject.a = 2;
+
+                myObject.a;         // 4
+                ---
+
+                * '_a_' name is purely convention
+                    -> no different than 'a' or 'foo' or '_foo_'
+
+- - - - - - - - - - - - - - - - - - - - -
+
 
 #########################################################
 // Ch 4: Mixing (up) "Class" Objects
 
+* Object-oriented programming
+    -> the object system in JS does not necessarily
+        map well until OO
+
 ------------------------------------------------
 ------------------Class Theory------------------
 ------------------------------------------------
+
+Class / inheritance = specific form of code organization / architecture
+
+* OO / class-oriented programming
+    -> data has associated behavior
+    -> encapsulate (package up) data + behavior
+            == data structures
+
+* Ex of encapsulationkey:
+    -> data = string
+    -> behavior = calc length, append, etc
+
+    thus, behaviors are all methods of String class
+    -> ever string is instance of String class
+
+Classes are used to classify data structures:
+
+* a car = implementation of class vehicle
+
+* model real-world relationship of a car being an example of a vehicle
+    -> Vehicle class and Car class
+
+    Vehicle class:
+        * behavior
+            -> propulsion (engine types)
+            -> ability to carry people
+    Car class:
+        * inherits base definition of Vehicle
+        * behavior
+            -> ...
+
+    => classes, inheritance, and instantiation from Vehicle + Car example
+
+* polymorphism
+    -> general behavior from parent class can be overridden
+        in a child class to give it more specifics
+
+// JavaScript "Classes"
+
+* JS does NOT have classes
+
+* JS has class-like syntax but not a true class architecture
+
+------------------------------------------------
+-----------------Class Mechanics----------------
+------------------------------------------------
+
+Most Class-oriented languages have a 'stack' data structure
+    -> push, pop, etc
+
+* Stack class has internal vars to store data
+    and publicly accessible methods (behavior) to access
+
+    -> But, Stack class is an abstract explanation
+            ...not an actual stack
+
+// Polymorphism
+
+Car is an instance of Vehicle class
+    -> Car can override Vehicle method with its own
+    BUT Car can still reference parent (Vehicle) method
+
+Polymorphism is Car having its own overridden version of a method
+    and also being able to call the parent method
+
+Polymorphism is a crucial part of the inheritance hierarchy
+    => any method can reference another method
+        at a higher level of the inheritance hierarchy
+
+Class inheritance implies copies...
+    => relative polymorphism / accessing parent class methods
+        does NOT imply a link...only a copy!
+
+// Multiple Inheritance
+
+* In some OO languages instance can inherit from multiple classes
+
+If classes B and C are inherited from A,
+    but B and C each have different overrides of
+    a method from A (polymorphism)
+        and then class D is inherited from B and C...
+
+    Does D have method from B or C?
+
+JS does NOT have multiple inheritance / any inheritance
+
+------------------------------------------------
+-------------------- Mixins --------------------
+------------------------------------------------
+
+no classes in JS, only objects
+
+* objects are not copied, they are linked together 
 
 
 
