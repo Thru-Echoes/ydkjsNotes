@@ -2310,9 +2310,22 @@ JS does NOT have multiple inheritance / any inheritance
 -------------------- Mixins --------------------
 ------------------------------------------------
 
+*** RECAP
+    * Polymorphism is when a child inherits a set of methods from parent
+        -> but, child overrides method
+        * child can use overridden method (local) or reference parent method
+
+    * Class inheritance implies copies...
+        -> JS on the other hand, has objects that are linked (not copied)
+*** *** *** ***
+
 no classes in JS, only objects
 
-* objects are not copied, they are linked together 
+* objects are not copied, they are linked together
+
+// Explicit Mixins
+
+
 
 
 
