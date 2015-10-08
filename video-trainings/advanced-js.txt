@@ -1,0 +1,160 @@
+# **Advanced JavaScript**
+### by *Kyle Simpson*
+
+This follows his *You Don't Know JavaScript* book series.
+
+---------------
+## Introduction
+
+#### Speaker: Kyle Simpson
+
+* LABjs: Loading And Blocking JS
+
+load scripts in parallel
+
+* grips: simple-logic template engine
+
+* *this* keyword
+
+*this* is applied to passed in argument
+if no argument, and null or undefined passed,
+*this* is set to global object
+
+### Resources:
+
+1. [ECMA Spec](http://www.ecma-international.org/ecma-262/5.1/)
+
+2. [JS Format](https://github.com/rwaldron/idiomatic.js)
+
+3. [Annotated ECMA Spec](http://es5.github.io/)
+
+### Course Agenda:
+
+* Nested Scope
+* Hoisting
+* this
+* Closure
+
+---------------
+## Scope
+
+### Questions of Scope:
+1. Where to look for things!
+2. Who is doing the looking?
+
+**Note:** JS is compiled, but compiled
+every time it runs.
+
+### JS is compiled language:
+
+* Bash files = interpreted
+Which means that it runs top down
+
+* JS (and other compiled languages)
+look at other parts of code before executing
+i.e. JS compiler looks at line 3 before executing line 2
+
+* JS has function-scoping
+as smallest unit of scoping
+
+### JS code passing
+
+* JS code is passed through once by compiler
+* after compiled, second pass for execution
+
+```
+var foo = "bar";
+
+function bar() {
+  var foo = "baz";
+}
+
+function baz(foo) {
+  foo = "bam";
+  bam = "yay";
+}
+```
+
+Declarations and initializations happen via different
+JS engine mechanisms at different time...
+
+* first pass, variable / function declaration
+
+* second pass, initialization
+
+### How to talk to JS compiler?
+
+```
+var foo = "bar";
+
+function bar() {
+  var foo = "baz";
+}
+
+function baz(foo) {
+  foo = "bam";
+  bam = "yay";
+}
+```
+
+Steps of the compiler + engine for code above:
+
+1. compiler sees declaration for var **foo**
+2. register **foo** identifier into appropriate scope (= global)
+3. compiler sees declaration of **bar()**
+4. register **bar()** as function in global scope
+5. compiler sees declaration of **foo** in bar-scope
+6. register **foo** as variable in bar scope
+7. ...
+8. **IMPORTANT** the **foo** within baz is like a local var declaration
+9. ...
+
+<br />
+...
+ Compiler in JS is very complex
+* can inference types
+* can use **JIT** behavior
+  -> Just In Time (holds on to declaration if not used yet)
+    uses declaration when it is called = just in time
+<br />
+
+### Execute compiled JS (from above)
+
+**var** are all ignored after compiler phase
+in other words, engine does not deal with **var**
+
+* LHS = left hand side
+* RHS = right hand side
+
+```
+var foo = "bar";
+```
+
+#### LHS: target
+
+e.g. **foo** = LHS
+
+#### RHS: source
+
+e.g. **"bar"** = RHS
+
+### Where does var exist?
+
+Ask Scope-manager...
+
+* ask global-scope (scope-manager) if it has reference to **foo**
+
+* asking for reference = LHS
+
+* global-scope (scope-manager) has reference since **foo** was declared
+
+
+
+---------------
+## Closure
+
+---------------
+## Object Orienting
+
+---------------
+## Async Patterns
