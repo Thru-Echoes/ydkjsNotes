@@ -148,6 +148,34 @@ Ask Scope-manager...
 
 * global-scope (scope-manager) has reference since **foo** was declared
 
+## Review:
+
+### How to talk to JS compiler?
+
+```
+var foo = "bar";
+
+function bar() {
+  var foo = "baz";
+}
+
+function baz(foo) {
+  foo = "bam";
+  bam = "yay";
+}
+```
+
+1. Global scope gets LHS reference for 'foo'
+2. Global declares 'foo' from LHS reference
+3. Engine asks Global scope to assign "bar" to 'foo'...
+    * Engine is asking if Global has LHS reference for 'foo'
+    * Engine is trying to give RHS reference to 'foo'
+4. ...
+
+#### Running function 'baz'
+
+1. baz-scope has LHS reference for 'foo' due to function declaration
+2. then baz-engine has RHS reference
 
 
 ---------------
